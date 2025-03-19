@@ -30,6 +30,10 @@ public class Database {
         return Managers;
     }
 
+    public SuperManager getSuperManager() {
+        return  superManager;
+    }
+
     public boolean validUser(String username, String password) {
         for(User user: Users) {
             if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
