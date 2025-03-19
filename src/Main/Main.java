@@ -10,9 +10,11 @@ import Models.SuperManager;
 
 public class Main {
 	public static void main(String[] args) {
+        //User
         System.out.println("Hello, World!");
         User ahmad = UserFactory.createUser("Student","ahmad","ahmadzaki@gmail.com","123","ON8828");
         System.out.println(ahmad.getUsername());
+        //Database
         Database database = Database.getInstance();
         database.addAccount(ahmad);
         System.out.println(database.getUsers().get(0).getUsername());
