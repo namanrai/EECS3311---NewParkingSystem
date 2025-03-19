@@ -1,4 +1,5 @@
 package Models;
+import Database.Database;
 import DesignPatterns.ParkingProxy;
 /*
 This method uses the singleton patten, to generate just one instance
@@ -43,8 +44,12 @@ public class SuperManager {
     public Manager createManagerAccount(boolean isManager) {
         // Create a ParkingProxy instance for the new Manager
         ParkingProxy parkingProxy = new ParkingProxy(isManager);
-        // Create and return a new Manager with the ParkingProxy
-        return new Manager(parkingProxy);
+        // Create and a new Manager with the ParkingProxy
+        Manager newManager = new Manager(parkingProxy);
+        // Added new Manager to database
+        Database.getInstance().addManager(newManager);
+        // Return new Manager
+        return newManager;
     }
 
 
