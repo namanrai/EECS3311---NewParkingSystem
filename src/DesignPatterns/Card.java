@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import java.time.LocalDateTime;
 
-class Card  {
+public class Card  {
     private int cardNumber;
     private User cardHolder;
     private String billingAddress;
