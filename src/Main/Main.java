@@ -30,8 +30,10 @@ public class Main {
         Manager manager = superManager.createManagerAccount(true);
         // Checking if the new manager exists in database
         System.out.println(database.getManagers().get(0).getName());
+        System.out.println(database.getManagers().get(0).getPassword());
 
-            //as a manager
+
+        //as a manager
             manager.addParkingLot("Lot-A");
             manager.addParkingLot("Lot-B");
             manager.enableParkinglot("Lot-A");
