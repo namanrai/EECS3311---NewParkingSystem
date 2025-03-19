@@ -2,7 +2,7 @@ package HelperFunctions;
 
 
 import DesignPatterns.PaymentMethod;
-import DesignPatterns.Card;
+import Models.Card;
 
 public class CardPayment extends PaymentMethod {
     public Card card;

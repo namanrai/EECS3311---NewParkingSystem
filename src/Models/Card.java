@@ -1,8 +1,4 @@
-package DesignPatterns;
-
-import Models.User;
-
-import java.util.ArrayList;
+package Models;
 
 import java.time.LocalDateTime;
 
