@@ -1,6 +1,8 @@
 package DesignPatterns;
 
-import Payment.User;
+import Models.User;
+
+import java.util.ArrayList;
 
 import java.time.LocalDateTime;
 
