@@ -10,14 +10,18 @@ of the SuperManager account type.
 
 public class SuperManager {
 
-    private static final SuperManager SuperManager1 = new SuperManager();//Early Init instead of Lazy Init
+    private static final SuperManager SuperManager1 = new SuperManager("admin","admin");//Early Init instead of Lazy Init
+    private String username;
+    private String password;
+
 
    /*
     private constructor so noby outside class can access this.
      */
 
-    private SuperManager(){
-
+    private SuperManager(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
     /*
