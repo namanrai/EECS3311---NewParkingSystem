@@ -1,4 +1,5 @@
 package Models;
+import Database.Database;
 import DesignPatterns.ParkingProxy;
 /*
 This method uses the singleton patten, to generate just one instance
@@ -10,14 +11,18 @@ of the SuperManager account type.
 
 public class SuperManager {
 
-    private static final SuperManager SuperManager1 = new SuperManager();//Early Init instead of Lazy Init
+    private static final SuperManager SuperManager1 = new SuperManager("admin","admin");//Early Init instead of Lazy Init
+    private String username;
+    private String password;
+
 
    /*
     private constructor so noby outside class can access this.
      */
 
-    private SuperManager(){
-
+    private SuperManager(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
     /*
@@ -39,8 +44,12 @@ public class SuperManager {
     public Manager createManagerAccount(boolean isManager) {
         // Create a ParkingProxy instance for the new Manager
         ParkingProxy parkingProxy = new ParkingProxy(isManager);
-        // Create and return a new Manager with the ParkingProxy
-        return new Manager(parkingProxy);
+        // Create and a new Manager with the ParkingProxy
+        Manager newManager = new Manager(parkingProxy);
+        // Added new Manager to database
+        Database.getInstance().addManager(newManager);
+        // Return new Manager
+        return newManager;
     }
 
 

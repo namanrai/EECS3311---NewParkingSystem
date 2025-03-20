@@ -54,12 +54,10 @@ public class Manager {
      */
 
     private String generateUsername(){
-        int length = userChar.length();
-
         Random randomgen = new Random();
         StringBuilder generatedUser = new StringBuilder();
 
-        for (int j = 0; j < length; j++) {
+        for (int j = 0; j < 6; j++) {
             int index = randomgen.nextInt(userChar.length());
             generatedUser.append(userChar.charAt(index));
         }
