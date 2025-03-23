@@ -27,7 +27,7 @@ public class Main {
         // Create a manager with full access to the Proxy
         Manager manager = superManager.createManagerAccount(true);
         // Checking if the new manager exists in database
-        System.out.println("Username: " + database.getManagers().get(0).getName() + " Password: " + database.getManagers().get(0).getPassword() + "\n");
+        System.out.println("Username: " + database.getManagers().get(0).getUsername() + " Password: " + database.getManagers().get(0).getPassword() + "\n");
 
         //as a manager
             manager.addParkingLot("Lot-A");
