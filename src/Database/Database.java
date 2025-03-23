@@ -56,13 +56,14 @@ public class Database {
 
             // Append new user to CSV
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
-                // Format: username,password,email,licensePlate,userType
-                String userData = String.format("%s,%s,%s,%s,%s\n",
+                // Format: username,password,email,licensePlate,userType,isValidated
+                String userData = String.format("%s,%s,%s,%s,%s,%b\n",
                         user.getUsername(),
                         user.getPassword(),
                         user.getEmail(),
                         user.getLicensePlate(),
-                        user.getClass().getSimpleName().toLowerCase()); // Gets subclass name
+                        user.getClass().getSimpleName().toLowerCase(), // Gets subclass name
+                        user.getisValidated()); // Store validation status
 
                 bw.write(userData);
                 System.out.println("User added successfully.");
@@ -97,7 +98,7 @@ public class Database {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length < 5) { // Ensure correct CSV format
+                if (data.length < 6) { // Ensure correct CSV format
                     System.out.println("Invalid user data: " + line);
                     continue;
                 }
@@ -107,13 +108,15 @@ public class Database {
                 String email = data[2];
                 String licensePlate = data[3];
                 String userType = data[4];
+                boolean isValidated = Boolean.parseBoolean(data[5]); // Read validation status
 
                 try {
-                    // Use the UserFactory to create user objects
+                    // Create user object using UserFactory
                     User user = UserFactory.createUser(userType, username, email, password, licensePlate);
+                    user.setValidated(isValidated); // Set validation status
                     users.add(user);
                 } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage()); // Handle unknown user types gracefully
+                    System.out.println(e.getMessage()); // Handle unknown user types
                 }
             }
         } catch (IOException e) {

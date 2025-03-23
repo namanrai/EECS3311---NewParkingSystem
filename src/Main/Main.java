@@ -36,6 +36,8 @@ public class Main {
         System.out.println("Username: " + database.getManagers().get(0).getUsername() + " Password: " + database.getManagers().get(0).getPassword() + "\n");
 
         //as a manager
+            manager.validateUsers(ahmad);
+            System.out.println(ahmad.getisValidated());
             manager.addParkingLot("Lot-A");
             manager.addParkingLot("Lot-B");
             manager.enableParkinglot("Lot-A");
