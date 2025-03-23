@@ -7,6 +7,7 @@ public interface User {
     ParkingSpace getParkingSpace();
     String getUsername();
 
+
     //Card paymentInformation(String input);
     boolean registerAccount(String username, String password);
 }

@@ -43,6 +43,26 @@ public class Database {
         return false;
     }
 
+    // Check if username already exists
+    public boolean userExists(String username) {
+        for (User user : Users) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Check if email already exists
+    public boolean emailExists(String email) {
+        for (User user : Users) {
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Database getInstance() {
         return  database;
     }

@@ -10,6 +10,7 @@ public class Visitor implements  User {
     private ParkingSpace parkingSpace;
     private String username;
 
+
     public Visitor(String name, String email, String password, String licensePlate) {
         this.username = name;
         this.email = email;
