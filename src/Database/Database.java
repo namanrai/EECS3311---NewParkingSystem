@@ -261,8 +261,8 @@ public class Database {
      * Retrieves all parking lots from the CSV file.
      * @return List of parking lots.
      */
-    public List<ParkingLot> getParkingLots() {
-        List<ParkingLot> parkingLots = new ArrayList<>();
+    public ArrayList<ParkingLot> getParkingLots() {
+        ArrayList<ParkingLot> parkingLots = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(PARKING_LOTS_FILE))) {
             String line;
             while ((line = br.readLine()) != null) {
