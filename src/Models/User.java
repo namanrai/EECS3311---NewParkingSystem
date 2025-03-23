@@ -17,6 +17,7 @@ public abstract class User {
     public abstract String getUsername();
     public abstract ArrayList<Booking> getBookings();
 
+
     //Card paymentInformation(String input);
     public abstract boolean registerAccount(String username, String password);
 }

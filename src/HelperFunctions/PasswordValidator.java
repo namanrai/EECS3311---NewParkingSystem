@@ -5,7 +5,7 @@ public class PasswordValidator {
     public static boolean isStrongPassword(String password) {
         // Minimum length requirement
         if (password == null || password.length() < 8) {
-            return true;
+            return false;
         }
 
         boolean hasUppercase = false;
@@ -29,6 +29,6 @@ public class PasswordValidator {
         }
 
         // Check if all conditions are met
-        return !hasUppercase || !hasLowercase || !hasDigit || !hasSpecialChar;
+        return hasUppercase && hasLowercase && hasDigit && hasSpecialChar;
     }
 }

@@ -13,6 +13,7 @@ public class Visitor extends User {
     private String username;
     private ArrayList<Booking> bookings;
 
+
     public Visitor(String name, String email, String password, String licensePlate) {
         this.username = name;
         this.email = email;
