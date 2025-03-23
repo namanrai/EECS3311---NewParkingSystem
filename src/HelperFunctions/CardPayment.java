@@ -13,14 +13,26 @@ public class CardPayment extends PaymentMethod {
 
     }
     @Override
-    public boolean processPayment(){
-        if(card.validateCard()){
-            return card.processPaymentAmount(amount);
-        }
-        else {
+    public boolean processPayment() {
+        if (card == null) {
+            System.out.println("No card provided");
             return false;
         }
 
+        if (isPaid) {
+            System.out.println("Payment has already been processed");
+            return true;
+        }
+
+        boolean success = card.processPaymentAmount(amount);
+        if (success) {
+            isPaid = true;
+        }
+        return success;
+    }
+
+    public Card getCard() {
+        return card;
     }
 
 
