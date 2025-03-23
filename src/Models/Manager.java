@@ -71,6 +71,10 @@ public class Manager {
         return generatedUser.toString();
     }
 
+    public void validateUsers(User user) {
+        user.setValidated(true);
+    }
+
     /**
      *  This method is used for adding a parking lot when required.
      *
@@ -147,13 +151,5 @@ public class Manager {
     public String getPassword(){
         return password;
     }
-
-
-
-
-
-
-
-
 
 }
