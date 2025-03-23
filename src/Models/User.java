@@ -1,12 +1,12 @@
 package Models;
 
-public interface User {
-    String getEmail();
-    String getPassword();
-    String getLicensePlate();
-    ParkingSpace getParkingSpace();
-    String getUsername();
+public abstract class User {
+    public abstract String getEmail();
+    public abstract String getPassword();
+    public abstract String getLicensePlate();
+    public abstract ParkingSpace getParkingSpace();
+    public abstract String getUsername();
 
     //Card paymentInformation(String input);
-    boolean registerAccount(String username, String password);
+    public abstract boolean registerAccount(String username, String password);
 }

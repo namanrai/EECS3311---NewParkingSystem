@@ -3,7 +3,7 @@ package Models;
 import Database.Database;
 import HelperFunctions.*;
 
-public class Visitor implements  User {
+public class Visitor extends User {
     private String email;
     private String password;
     private String licensePlate;

@@ -3,7 +3,7 @@ package Models;
 import Database.Database;
 import HelperFunctions.*;
 
-public class Staff implements  User {
+public class Staff extends User {
     private String email;
     private String password;
     private String licensePlate;

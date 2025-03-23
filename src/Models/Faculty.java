@@ -3,7 +3,7 @@ package Models;
 import Database.Database;
 import HelperFunctions.*;
 
-public class Faculty implements  User {
+public class Faculty extends User {
     private String email;
     private String password;
     private String licensePlate;
