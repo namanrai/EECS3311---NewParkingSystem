@@ -43,6 +43,42 @@ public class Database {
         return false;
     }
 
+
+    public boolean validManager(String username, String password) {
+        for(Manager manager: Managers) {
+            if(manager.getUsername().equals(username) && manager.getPassword().equals(password)) {
+
+
+
+
+    public boolean validSuperManager(String username, String password) {
+        if (username.equals("admin") && password.equals("admin")) {
+            return true;
+
+          
+              // Check if username already exists
+    public boolean userExists(String username) {
+        for (User user : Users) {
+            if (user.getUsername().equals(username)) {
+
+                return true;
+            }
+        }
+        return false;
+    }
+          
+          
+    // Check if email already exists
+    public boolean emailExists(String email) {
+        for (User user : Users) {
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
     public static Database getInstance() {
         return  database;
     }
