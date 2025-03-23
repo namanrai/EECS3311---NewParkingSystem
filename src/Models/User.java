@@ -9,6 +9,7 @@ public abstract class User {
     private ParkingSpace parkingSpace;
     private String username;
     private ArrayList<Booking> bookings;
+    private boolean isValidated;
 
     public abstract String getEmail();
     public abstract String getPassword();
@@ -16,6 +17,14 @@ public abstract class User {
     public abstract ParkingSpace getParkingSpace();
     public abstract String getUsername();
     public abstract ArrayList<Booking> getBookings();
+
+    public boolean getisValidated() {
+        return isValidated;
+    }
+
+    public void setValidated(boolean flag) {
+        this.isValidated = flag;
+    }
 
 
     //Card paymentInformation(String input);

@@ -12,6 +12,7 @@ public class Faculty extends User {
     private ParkingSpace parkingSpace;
     private String username;
     private ArrayList<Booking> bookings;
+    private boolean isValidated = false;
 
     public Faculty(String name, String email, String password, String licensePlate) {
         this.username = name;
