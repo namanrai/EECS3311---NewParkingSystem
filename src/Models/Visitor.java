@@ -67,30 +67,28 @@ public class Visitor extends User {
     public boolean registerAccount(String username, String password) {
         // Access the Database instance using the Singleton pattern
         Database database = Database.getInstance();
-        boolean exists = false;
 
-        // Check if the username already exists in the system
-        for (User user : database.getUsers()) {
-            if (user.getUsername().equals(username)) {
-                exists = true;
-                System.out.println("Username already exists");
-            }
-        }
-
-        // Validates password strength using the PasswordValidator helper
-        if (PasswordValidator.isStrongPassword(password)) {
-            System.out.println("Password not strong");
+        // Check if the username already exists
+        if (database.userExists(username)) {
+            System.out.println("User already exists.");
             return false;
         }
 
-        // If username doesn't exist, register the new Visitor
-        if (!exists) {
-            database.addAccount(this);  // Adds the Visitor object to the database
-            System.out.println("Account Registration Successful");
-            return true;
+        // Check if the email is already registered
+        if (database.emailExists(this.email)) {
+            System.out.println("Email is already registered.");
+            return false;
         }
 
-        // Registration fails if username exists
-        return false;
+        // Validate password strength using the PasswordValidator helper
+        if (!PasswordValidator.isStrongPassword(password)) {
+            System.out.println("Password is not strong enough.");
+            return false;
+        }
+
+        // Register the Visitor if all checks pass
+        database.addAccount(this);
+        System.out.println("Account Registration Successful.");
+        return true;
     }
 }
