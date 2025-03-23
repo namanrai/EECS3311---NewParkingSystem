@@ -6,7 +6,6 @@ import Database.Database;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ParkingProxy {
     private List<ParkingLot> parkingLots;
     private boolean isManager;
