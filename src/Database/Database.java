@@ -52,6 +52,13 @@ public class Database {
         return false;
     }
 
+    public boolean validSuperManager(String username, String password) {
+        if (username.equals("admin") && password.equals("admin")) {
+            return true;
+        }
+        return false;
+    }
+
     public static Database getInstance() {
         return  database;
     }
