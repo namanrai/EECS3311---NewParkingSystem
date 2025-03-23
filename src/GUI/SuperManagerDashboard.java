@@ -60,7 +60,7 @@ public class SuperManagerDashboard extends JFrame {
         JButton generateButton = new JButton("Generate New Manager");
         generateButton.addActionListener(e -> {
             Manager newManager = SuperManager.getInstance().createManagerAccount(true);
-            usernameField.setText(newManager.getName());
+            usernameField.setText(newManager.getUsername());
             passwordField.setText(newManager.getPassword());
             JOptionPane.showMessageDialog(this, "Manager account created successfully!");
         });
@@ -94,7 +94,7 @@ public class SuperManagerDashboard extends JFrame {
             // Fetch data from Database
             ArrayList<Manager> managers = database.getManagers();
             for (Manager manager : managers) {
-                tableModel.addRow(new Object[]{manager.getName(), manager.getPassword()});
+                tableModel.addRow(new Object[]{manager.getUsername(), manager.getPassword()});
             }
         });
 
