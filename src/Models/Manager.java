@@ -23,6 +23,12 @@ public class Manager {
      * Constructor for the class
      */
 
+    Manager(String username, String password, ParkingProxy access) {
+        this.username = username;
+        this.password = password;
+        this.access = access;
+    }
+
     public Manager(ParkingProxy access) {
         this.username = generateUsername();
         this.password = generateUserPassword();

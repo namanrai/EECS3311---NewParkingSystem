@@ -9,9 +9,9 @@ of the SuperManager account type.
 
 
 
-public class SuperManager {
+public class SuperManager extends Manager {
 
-    private static final SuperManager SuperManager1 = new SuperManager("admin","admin");//Early Init instead of Lazy Init
+    private static final SuperManager SuperManager1 = new SuperManager("admin","admin",new ParkingProxy(true));//Early Init instead of Lazy Init
     private String username;
     private String password;
 
@@ -20,9 +20,8 @@ public class SuperManager {
     private constructor so noby outside class can access this.
      */
 
-    private SuperManager(String username, String password){
-        this.username = username;
-        this.password = password;
+    private SuperManager(String username, String password, ParkingProxy access){
+        super(username, password, access);
     }
 
     /*
