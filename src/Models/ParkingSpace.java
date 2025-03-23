@@ -57,7 +57,6 @@ public class ParkingSpace {
         sensor.clearDetection();
     }
 
-
     public void disable() {
         this.isDisabled = true;
     }
