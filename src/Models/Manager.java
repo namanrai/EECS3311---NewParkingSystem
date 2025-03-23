@@ -23,7 +23,7 @@ public class Manager {
      * Constructor for the class
      */
 
-    Manager(String username, String password, ParkingProxy access) {
+    public Manager(String username, String password, ParkingProxy access) {
         this.username = username;
         this.password = password;
         this.access = access;
