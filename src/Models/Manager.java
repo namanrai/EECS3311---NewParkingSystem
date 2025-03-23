@@ -140,7 +140,7 @@ public class Manager {
     }
 
 
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 

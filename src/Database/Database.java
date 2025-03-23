@@ -43,6 +43,15 @@ public class Database {
         return false;
     }
 
+    public boolean validManager(String username, String password) {
+        for(Manager manager: Managers) {
+            if(manager.getUsername().equals(username) && manager.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Database getInstance() {
         return  database;
     }
