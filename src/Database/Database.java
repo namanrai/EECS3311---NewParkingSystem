@@ -1,6 +1,7 @@
 package Database;
 
 import DesignPatterns.ParkingProxy;
+import DesignPatterns.UserFactory;
 import Models.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -107,22 +108,12 @@ public class Database {
                 String licensePlate = data[3];
                 String userType = data[4];
 
-                // Create a corresponding User object based on the user type
-                switch (userType.toLowerCase()) {
-                    case "student":
-                        users.add(new Student(username, email, password, licensePlate));
-                        break;
-                    case "faculty":
-                        users.add(new Faculty(username, email, password, licensePlate));
-                        break;
-                    case "staff":
-                        users.add(new Staff(username, email, password, licensePlate));
-                        break;
-                    case "visitor":
-                        users.add(new Visitor(username, email, password, licensePlate));
-                        break;
-                    default:
-                        System.out.println("Unknown user type: " + userType);
+                try {
+                    // Use the UserFactory to create user objects
+                    User user = UserFactory.createUser(userType, username, email, password, licensePlate);
+                    users.add(user);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage()); // Handle unknown user types gracefully
                 }
             }
         } catch (IOException e) {
