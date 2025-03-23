@@ -20,7 +20,6 @@ public class Booking {
         this.endTime = endTime;
         this.isPaid = false;
         this.isCancelled = false;
-
         this.parkingSpace.setState(new BookedState());
     }
 

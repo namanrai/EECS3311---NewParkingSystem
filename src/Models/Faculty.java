@@ -3,12 +3,15 @@ package Models;
 import Database.Database;
 import HelperFunctions.*;
 
+import java.util.ArrayList;
+
 public class Faculty extends User {
     private String email;
     private String password;
     private String licensePlate;
     private ParkingSpace parkingSpace;
     private String username;
+    private ArrayList<Booking> bookings;
 
     public Faculty(String name, String email, String password, String licensePlate) {
         this.username = name;
@@ -45,6 +48,11 @@ public class Faculty extends User {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public ArrayList<Booking> getBookings() {
+        return bookings;
     }
 
     // Payment method was commented out — consider implementing when payment logic is required
