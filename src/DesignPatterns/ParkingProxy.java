@@ -2,7 +2,7 @@ package DesignPatterns;
 
 import Models.ParkingLot;
 import Models.ParkingSpace;
-
+import Database.Database;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class ParkingProxy {
         if (isManager) {
             ParkingLot newLot = new ParkingLot(lotID); // Create a new ParkingLot
             parkingLots.add(newLot); // Add it to the list
+            Database.getInstance().addParkingLot(newLot);
             System.out.println("Parking Lot " + lotID + " has been added.");
         } else {
             System.out.println("Unauthorized access: Only managers can add parking lots.");
@@ -29,6 +30,8 @@ public class ParkingProxy {
 
     //removes parkinglot from list
     public void removeParkingLot(String lotID) {
+        //Database.getInstance().removeParkingLot(lotID);
+
         if (isManager) {
             ParkingLot lotToRemove = null;
             for (ParkingLot lot : parkingLots) {
@@ -39,6 +42,7 @@ public class ParkingProxy {
             }
             if (lotToRemove != null) { //if the lot is found
                 parkingLots.remove(lotToRemove); // Remove the parking lot
+                Database.getInstance().removeParkingLot(lotID);
                 System.out.println("Parking Lot " + lotID + " has been removed.");
             } else {
                 System.out.println("Error: Parking Lot " + lotID + " not found.");
@@ -55,6 +59,7 @@ public class ParkingProxy {
 
     // enable/disable the entire parking lot (restricted to managers)
     public void toggleParkingLot(String LotID, boolean request) {
+
         if (isManager) {
             ParkingLot selectedLot = null;
             for (ParkingLot lot : parkingLots) {
@@ -66,9 +71,11 @@ public class ParkingProxy {
             if (selectedLot != null) { // if the lot is found
                 if (request) {
                     selectedLot.enable(); // Enable the parking lot
+                    Database.getInstance().updateParkingLotStatus(selectedLot.getLotId(), true);
                     System.out.println("Parking Lot " + LotID + " is enabled.");
                 } else {
                     selectedLot.disable(); // Disable the parking lot
+                    Database.getInstance().updateParkingLotStatus(selectedLot.getLotId(), false);
                     System.out.println("Parking Lot " + LotID + " is disabled.");
                 }
             } else {

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-    // File paths for storing user and manager data in CSV format
+    // File paths for storing user, manager and parkinglot data in CSV format
     private static final String USERS_FILE = "users.csv";
     private static final String MANAGERS_FILE = "managers.csv";
+    private static final String PARKING_LOTS_FILE = "parkinglots.csv";
+
 
     // Singleton instance of the SuperManager
     private SuperManager superManager = SuperManager.getInstance();
@@ -233,5 +235,87 @@ public class Database {
             }
         }
         return false;
+    }
+
+    /**
+     * Adds a parking lot to the CSV file.
+     * @param parkingLot The parking lot to add.
+     */
+    public void addParkingLot(ParkingLot parkingLot) {
+        List<ParkingLot> existingLots = getParkingLots();
+        for (ParkingLot lot : existingLots) {
+            if (lot.getLotId().equals(parkingLot.getLotId())) {
+                System.out.println("Parking lot already exists.");
+                return;
+            }
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PARKING_LOTS_FILE, true))) {
+            // Format: lotId,isDisabled
+            bw.write(parkingLot.getLotId() + "," + parkingLot.isDisabled() + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Retrieves all parking lots from the CSV file.
+     * @return List of parking lots.
+     */
+    public List<ParkingLot> getParkingLots() {
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(PARKING_LOTS_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length < 2) continue;
+
+                String lotId = data[0];
+                boolean isDisabled = Boolean.parseBoolean(data[1]);
+                ParkingLot parkingLot = new ParkingLot(lotId);
+                if (isDisabled) parkingLot.disable();
+                parkingLots.add(parkingLot);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return parkingLots;
+    }
+
+    /**
+     * Updates the parking lot's status in the CSV file.
+     * @param lotId The ID of the parking lot.
+     * @param isDisabled New status of the parking lot.
+     */
+    public void updateParkingLotStatus(String lotId, boolean isDisabled) {
+        List<ParkingLot> lots = getParkingLots();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PARKING_LOTS_FILE))) {
+            for (ParkingLot lot : lots) {
+                if (lot.getLotId().equals(lotId)) {
+                    lot.disable();
+                    bw.write(lot.getLotId() + "," + isDisabled + "\n");
+                } else {
+                    bw.write(lot.getLotId() + "," + lot.isDisabled() + "\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Removes a parking lot from the CSV file.
+     * @param lotId The ID of the parking lot to remove.
+     */
+    public void removeParkingLot(String lotId) {
+        List<ParkingLot> lots = getParkingLots();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PARKING_LOTS_FILE))) {
+            for (ParkingLot lot : lots) {
+                if (!lot.getLotId().equals(lotId)) {
+                    bw.write(lot.getLotId() + "," + lot.isDisabled() + "\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
