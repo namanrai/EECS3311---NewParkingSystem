@@ -126,6 +126,25 @@ public class Database {
     }
 
     /**
+     * Retrieves all users that have not been validated.
+     * This method filters users from the database where the `isValidated` flag is false.
+     *
+     * @return A list of users who are not yet validated.
+     */
+    public ArrayList<User> getUnvalidatedUsers() {
+        ArrayList<User> unvalidatedUsers = new ArrayList<>(); // List to store unvalidated users
+
+        // Iterate through the list of all users retrieved from the database
+        for (User user : getUsers()) {
+            if (!user.getisValidated()) { // Check if the user is not validated
+                unvalidatedUsers.add(user); // Add the unvalidated user to the list
+            }
+        }
+
+        return unvalidatedUsers; // Return the list of unvalidated users
+    }
+
+    /**
      * Reads manager data from the CSV file and returns a list of Manager objects.
      * @return List of registered managers.
      */

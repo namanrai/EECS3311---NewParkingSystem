@@ -1,7 +1,11 @@
 package Models;
 import DesignPatterns.ParkingProxy;
 
+import Database.Database;
+import DesignPatterns.ParkingProxy;
 import java.util.Random;
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * This is the class for the manager account. A manager can add, enable, and disable
@@ -71,8 +75,36 @@ public class Manager {
         return generatedUser.toString();
     }
 
-    public void validateUsers(User user) {
-        user.setValidated(true);
+    /**
+     * Validates a user by setting their isValidated status to true
+     * and updates the CSV file to reflect this change.
+     *
+     * @param username The username of the user to be validated.
+     */
+    public void validateUsers(String username) {
+        Database db = Database.getInstance();
+        ArrayList<User> users = db.getUsers(); // Load all users from the CSV
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("users.csv"))) {
+            for (User user : users) {
+                // If this is the user being validated, update their validation status
+                if (user.getUsername().equals(username)) {
+                    user.setValidated(true);
+                }
+                // Write the updated user data back to the file
+                String userData = String.format("%s,%s,%s,%s,%s,%b\n",
+                        user.getUsername(),
+                        user.getPassword(),
+                        user.getEmail(),
+                        user.getLicensePlate(),
+                        user.getClass().getSimpleName().toLowerCase(),
+                        user.getisValidated()); // Ensure validation status is saved
+
+                bw.write(userData);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
