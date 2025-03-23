@@ -1,6 +1,7 @@
 package Models;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Card  {
     private int cardNumber;
@@ -10,8 +11,8 @@ public class Card  {
     private int CVV;
     private int expirationDate;
 
-    public Card(int cardNumber, User cardHolder, String billingAddress, String cardType, int CVV, int expirationDate) {
-        this.cardNumber = cardNumber;
+    public Card(String cardNumber, User cardHolder, String billingAddress, String cardType, int CVV, int expirationDate) {
+        this.cardNumber = Integer.parseInt(cardNumber);
         this.cardHolder = cardHolder;
         this.billingAddress = billingAddress;
         this.cardType = cardType;
@@ -25,6 +26,18 @@ public class Card  {
     }
 
     public boolean processPaymentAmount(float amount) {
-        return amount > 0; // Simulating a successful payment
+        if (amount <= 0) {
+            System.out.println("Invalid payment amount");
+            return false;
+        }
+
+        // Simulate payment processing
+        boolean paymentSuccess = validateCard();
+        if (paymentSuccess) {
+            System.out.println("Payment processed successfully: $" + amount);
+        } else {
+            System.out.println("Payment processing failed");
+        }
+        return paymentSuccess;
     }
 }

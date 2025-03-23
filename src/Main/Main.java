@@ -2,9 +2,15 @@ package Main;
 
 import Database.Database;
 import DesignPatterns.*;
+import HelperFunctions.CardPayment;
+import HelperFunctions.ReciptDecorator;
+import Models.Card;
 import Models.Manager;
 import Models.User;
 import Models.SuperManager;
+
+
+import java.time.LocalDateTime;
 
 public class Main {
 	public static void main(String[] args) {
@@ -44,5 +50,15 @@ public class Main {
             user.addParkingLot("Lot-C"); // Unauthorized access
             user.enableParkinglot("Lot-A"); // Unauthorized access
             user.removeParkingLot("Lot-A"); // Unauthorized access
+
+
+            Card card = new Card("1234-5678-9012-3456", ahmad, "123 Street", "VISA", 123,
+                    2025);
+            PaymentMethod payment = new CardPayment(100.0f, card);
+
+
+            PaymentMethod paymentWithReceipt = new ReciptDecorator(payment);
+            boolean success = paymentWithReceipt.processPayment();
+            System.out.println("Payment processed: " + success);
     }
 }
