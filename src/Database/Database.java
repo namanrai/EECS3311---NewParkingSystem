@@ -4,6 +4,8 @@ import DesignPatterns.ParkingProxy;
 import DesignPatterns.UserFactory;
 import Models.*;
 import java.io.*;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class Database {
     private static final String USERS_FILE = "users.csv";
     private static final String MANAGERS_FILE = "managers.csv";
     private static final String PARKING_LOTS_FILE = "parkinglots.csv";
+    private static final String BOOKINGS_FILE = "bookings.csv";
 
 
     // Singleton instance of the SuperManager
@@ -317,5 +320,157 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Saves a booking to the CSV file.
+     * Excludes the ParkingSpace object.
+     * @param booking The booking object to store.
+     */
+    /**
+     * Saves a booking to the CSV file.
+     * Excludes the ParkingSpace object.
+     * @param booking The booking object to store.
+     */
+    public void addBooking(Booking booking) {
+        List<Booking> bookings = getBookings(); // Load existing bookings
+
+        // Check if booking already exists
+        for (Booking existingBooking : bookings) {
+            if (existingBooking.getBookingId().equals(booking.getBookingId())) {
+                System.out.println("Booking already exists.");
+                return; // Exit without adding duplicate
+            }
+        }
+
+        // Append new booking to CSV
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(BOOKINGS_FILE, true))) {
+            String bookingData = String.format("%s,%s,%s,%s,%s,%b,%b\n",
+                    booking.getBookingId(),
+                    booking.getUsername(),
+                    booking.getParkingSpace().getId(),
+                    booking.getStartTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
+                    booking.getEndTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
+                    booking.isPaid(),
+                    booking.isCancelled()
+            );
+            bw.write(bookingData);
+            System.out.println("Booking added successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Retrieves all bookings from the CSV file.
+     * @return List of Booking objects.
+     */
+    public ArrayList<Booking> getBookings() {
+        ArrayList<Booking> bookings = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(BOOKINGS_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length < 7) continue; // Ensure valid format
+
+                String bookingId = data[0];
+                String username = data[1];
+                String parkingSpaceID = data[2];
+                LocalTime startTime = LocalTime.parse(data[3], DateTimeFormatter.ISO_LOCAL_TIME);
+                LocalTime endTime = LocalTime.parse(data[4], DateTimeFormatter.ISO_LOCAL_TIME);
+                boolean isPaid = Boolean.parseBoolean(data[5]);
+                boolean isCancelled = Boolean.parseBoolean(data[6]);
+
+                ParkingSpace parkingSpace = new ParkingSpace(parkingSpaceID, "lot-1"); // Dummy ParkingSpace
+                Booking booking = new Booking(bookingId, username, parkingSpaceID, parkingSpace, startTime, endTime);
+                if (isPaid) booking.markAsPaid();
+                if (isCancelled) booking.cancelBooking();
+
+                bookings.add(booking);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
+
+    /**
+     * Marks a booking as paid and updates the CSV file.
+     * @param bookingId The booking ID to update.
+     */
+    public void markBookingAsPaid(String bookingId) {
+        List<Booking> bookings = getBookings();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(BOOKINGS_FILE))) {
+            for (Booking booking : bookings) {
+                if (booking.getBookingId().equals(bookingId)) {
+                    booking.markAsPaid();
+                }
+                bw.write(serializeBooking(booking) + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Cancels a booking and updates the CSV file.
+     * @param bookingId The booking ID to cancel.
+     */
+    public void cancelBooking(String bookingId) {
+        List<Booking> bookings = getBookings();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(BOOKINGS_FILE))) {
+            for (Booking booking : bookings) {
+                if (!booking.getBookingId().equals(bookingId)) { // Only write bookings that are NOT being deleted
+                    bw.write(serializeBooking(booking) + "\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Serializes a Booking object into a CSV string.
+     * @param booking The booking to serialize.
+     * @return CSV formatted string.
+     */
+    public String serializeBooking(Booking booking) {
+        return String.format("%s,%s,%s,%s,%s,%b,%b",
+                booking.getBookingId(),
+                booking.getUsername(),
+                booking.getParkingSpace().getId(),
+                booking.getStartTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
+                booking.getEndTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
+                booking.isPaid(),
+                booking.isCancelled()
+        );
+    }
+
+    /**
+     * Retrieves all bookings associated with a specific user.
+     * This method filters through the stored bookings and returns
+     * only those that match the provided username.
+     *
+     * @param username The username for which to retrieve bookings.
+     * @return An ArrayList of Booking objects belonging to the specified user.
+     */
+    public ArrayList<Booking> getuserBooking(String username) {
+        // Create an empty list to store the user's bookings
+        ArrayList<Booking> userBookings = new ArrayList<>();
+
+        // Retrieve the complete list of bookings from the database (CSV file)
+        List<Booking> allBookings = getBookings();
+
+        // Iterate through all bookings and filter based on username
+        for (Booking booking : allBookings) {
+            // If the booking's username matches the given username, add it to the list
+            if (booking.getUsername().equals(username)) {
+                userBookings.add(booking);
+            }
+        }
+
+        // Return the filtered list of bookings that belong to the specified user
+        return userBookings;
     }
 }
