@@ -81,7 +81,7 @@ public class Manager {
      *
      * @param username The username of the user to be validated.
      */
-    public void validateUsers(String username) {
+    public static void validateUsers(String username) {
         Database db = Database.getInstance();
         ArrayList<User> users = db.getUsers(); // Load all users from the CSV
 

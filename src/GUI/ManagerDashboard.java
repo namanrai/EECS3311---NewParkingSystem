@@ -26,21 +26,27 @@ public class ManagerDashboard extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(new JScrollPane(parkingLotsList), BorderLayout.CENTER);
 
+        // Create Buttons
         JButton addLotButton = new JButton("Add Parking Lot");
         JButton toggleLotButton = new JButton("Enable/Disable Lot");
         JButton manageSpacesButton = new JButton("Manage Spaces");
+        JButton openValidationDashboardButton = new JButton("Open Validation Dashboard"); // Ensure it's visible
 
-        JPanel buttonPanel = new JPanel();
+        // Fix Layout: Use GridLayout to display buttons properly
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 10, 10)); // 4 rows, 1 column, spacing for visibility
         buttonPanel.add(addLotButton);
         buttonPanel.add(toggleLotButton);
         buttonPanel.add(manageSpacesButton);
+        buttonPanel.add(openValidationDashboardButton); // Now it's clearly visible
 
-        panel.add(buttonPanel, BorderLayout.SOUTH);
+        panel.add(buttonPanel, BorderLayout.EAST); // Move buttons to the right for better visibility
         add(panel);
 
+        // Add button actions
         addLotButton.addActionListener(e -> addParkingLot());
         toggleLotButton.addActionListener(e -> toggleParkingLot());
         manageSpacesButton.addActionListener(e -> manageSpaces());
+        openValidationDashboardButton.addActionListener(e -> openValidationDashboard());
 
         setVisible(true);
     }
@@ -104,6 +110,10 @@ public class ManagerDashboard extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Select a parking lot first.");
         }
+    }
+
+    private void openValidationDashboard() {
+        new ManagerVal(); // Opens validation dashboard
     }
 
     public static void main(String[] args) {
