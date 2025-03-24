@@ -4,13 +4,11 @@ import Database.Database;
 import DesignPatterns.*;
 import HelperFunctions.CardPayment;
 import HelperFunctions.ReciptDecorator;
-import Models.Card;
-import Models.Manager;
-import Models.User;
-import Models.SuperManager;
+import Models.*;
 
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Main {
@@ -43,6 +41,12 @@ public class Main {
             manager.validateUsers(ahmad.getUsername());
             System.out.println(database.getUsers().get(0).getisValidated());
             manager.addParkingLot("Lot-A");
+            ahmad.makeBooking("1", "ahmad", "lot1", manager.getParkingLot().get(0).getSpaces().get(0), LocalTime.now(), LocalTime.MIDNIGHT);
+            database.markBookingAsPaid("1");
+            System.out.println(database.serializeBooking(database.getBookings().get(0)));
+            naman.makeBooking("2", "naman", "lot1", manager.getParkingLot().get(0).getSpaces().get(0), LocalTime.now(), LocalTime.MIDNIGHT);
+            System.out.println(database.serializeBooking(database.getuserBooking("naman").get(0)));
+            ahmad.cancelBooking("1");
             manager.addParkingLot("Lot-B");
             manager.enableParkinglot("Lot-A");
             manager.disableParkinglot("Lot-B");
@@ -58,8 +62,7 @@ public class Main {
             user.removeParkingLot("Lot-A"); // Unauthorized access
 
 
-            Card card = new Card("1234-5678-9012-3456", ahmad, "123 Street", "VISA", 123,
-                    2025);
+            Card card = new Card("1234-5678-9012-3456", ahmad, "123 Street", "VISA", 123, 2025);
             PaymentMethod payment = new CardPayment(100.0f, card);
 
 
