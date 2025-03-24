@@ -39,6 +39,7 @@ public class SuperManagerDashboard extends JFrame {
             new Login().setVisible(true);
         });
         add(logoutButton, BorderLayout.SOUTH);
+        setVisible(true);
     }
 
     // Panel for Creating Manager Accounts

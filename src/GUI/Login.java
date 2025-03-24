@@ -80,7 +80,24 @@ public class Login extends JFrame {
         }
 
         // Validate credentials
-        if (database.validUser(username, password)) {
+        boolean isValid = false;
+        switch (userType) {
+            case "User":
+                isValid = database.validUser(username, password);
+                break;
+            case "Manager":
+                isValid = database.validManager(username, password);
+                break;
+            case "SuperManager":
+                isValid = database.validSuperManager(username, password);
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Invalid user type selected.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+
+        // Handle login result
+        if (isValid) {
             JOptionPane.showMessageDialog(this, "Login successful! Welcome, " + username + ".");
             openDashboard(userType);
         } else {
@@ -109,7 +126,7 @@ public class Login extends JFrame {
 //                new ManagerDashboard();
                 break;
             case "SuperManager":
-//                new SuperManagerDashboard();
+                new SuperManagerDashboard();
                 break;
             default:
                 JOptionPane.showMessageDialog(this, "Select a user type.", "Error", JOptionPane.ERROR_MESSAGE);

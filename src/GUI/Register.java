@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class Register extends JFrame {
     private JTextField usernameField;
     private JTextField emailField;
+    private JTextField licensePlateField;
     private JPasswordField passwordField;
     private JComboBox<String> userTypeList;
     private JButton registerButton;
@@ -33,6 +34,10 @@ public class Register extends JFrame {
         panel.add(new JLabel("Email:"));
         emailField = new JTextField();
         panel.add(emailField);
+
+        panel.add(new JLabel("License Plate:"));
+        licensePlateField = new JTextField();
+        panel.add(licensePlateField);
 
         panel.add(new JLabel("Password:"));
         passwordField = new JPasswordField();
@@ -62,11 +67,12 @@ public class Register extends JFrame {
     private void register() {
         String username = usernameField.getText().trim();
         String email = emailField.getText().trim();
+        String licensePlate = licensePlateField.getText().trim();
         String password = new String(passwordField.getPassword()).trim();
         String userType = (String) userTypeList.getSelectedItem();
 
         // Validate input fields
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || licensePlate.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Text Field cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -97,7 +103,7 @@ public class Register extends JFrame {
 
         // Create a new user using the UserFactory
         try {
-            User newUser = UserFactory.createUser(userType, username, email, password, "DEFAULT123");
+            User newUser = UserFactory.createUser(userType, username, email, password, licensePlate);
             database.addAccount(newUser);
             JOptionPane.showMessageDialog(this, "Registration Successful!");
             this.dispose(); // Close the registration window
