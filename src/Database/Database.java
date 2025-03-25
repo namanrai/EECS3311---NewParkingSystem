@@ -16,7 +16,6 @@ public class Database {
     private static final String PARKING_LOTS_FILE = "parkinglots.csv";
     private static final String BOOKINGS_FILE = "bookings.csv";
 
-
     // Singleton instance of the SuperManager
     private SuperManager superManager = SuperManager.getInstance();
 
@@ -24,10 +23,12 @@ public class Database {
     private static final Database database = new Database();
 
     // Private constructor to enforce singleton pattern
-    private Database() {}
+    private Database() {
+    }
 
     /**
      * Returns the single instance of the Database class.
+     * 
      * @return Database instance.
      */
     public static Database getInstance() {
@@ -36,6 +37,7 @@ public class Database {
 
     /**
      * Returns the single instance of SuperManager.
+     * 
      * @return SuperManager instance.
      */
     public SuperManager getSuperManager() {
@@ -45,6 +47,7 @@ public class Database {
     /**
      * Adds a user to the CSV file.
      * Prevents duplicate usernames from being added.
+     * 
      * @param user The user object to be added.
      */
     public void addAccount(User user) {
@@ -81,11 +84,12 @@ public class Database {
 
     /**
      * Adds a manager to the CSV file.
+     * 
      * @param manager The manager object to be added.
      */
     public void addManager(Manager manager) {
         try (FileWriter fw = new FileWriter(MANAGERS_FILE, true);
-             PrintWriter pw = new PrintWriter(fw)) {
+                PrintWriter pw = new PrintWriter(fw)) {
             // Format: username,password
             pw.println(manager.getUsername() + "," + manager.getPassword());
         } catch (IOException e) {
@@ -95,6 +99,7 @@ public class Database {
 
     /**
      * Reads user data from the CSV file and returns a list of User objects.
+     * 
      * @return List of registered users.
      */
     public ArrayList<User> getUsers() {
@@ -132,7 +137,8 @@ public class Database {
 
     /**
      * Retrieves all users that have not been validated.
-     * This method filters users from the database where the `isValidated` flag is false.
+     * This method filters users from the database where the `isValidated` flag is
+     * false.
      *
      * @return A list of users who are not yet validated.
      */
@@ -151,6 +157,7 @@ public class Database {
 
     /**
      * Reads manager data from the CSV file and returns a list of Manager objects.
+     * 
      * @return List of registered managers.
      */
     public ArrayList<Manager> getManagers() {
@@ -173,6 +180,7 @@ public class Database {
 
     /**
      * Validates user login credentials.
+     * 
      * @param username The entered username.
      * @param password The entered password.
      * @return True if valid credentials, otherwise false.
@@ -188,6 +196,7 @@ public class Database {
 
     /**
      * Validates manager login credentials.
+     * 
      * @param username The entered username.
      * @param password The entered password.
      * @return True if valid credentials, otherwise false.
@@ -204,6 +213,7 @@ public class Database {
     /**
      * Validates SuperManager credentials.
      * Default credentials are "admin" for both username and password.
+     * 
      * @param username The entered username.
      * @param password The entered password.
      * @return True if the credentials match SuperManager, otherwise false.
@@ -214,6 +224,7 @@ public class Database {
 
     /**
      * Checks if a username already exists in the user database.
+     * 
      * @param username The username to check.
      * @return True if the username exists, otherwise false.
      */
@@ -228,6 +239,7 @@ public class Database {
 
     /**
      * Checks if an email already exists in the user database.
+     * 
      * @param email The email to check.
      * @return True if the email exists, otherwise false.
      */
@@ -242,6 +254,7 @@ public class Database {
 
     /**
      * Adds a parking lot to the CSV file.
+     * 
      * @param parkingLot The parking lot to add.
      */
     public void addParkingLot(ParkingLot parkingLot) {
@@ -262,6 +275,7 @@ public class Database {
 
     /**
      * Retrieves all parking lots from the CSV file.
+     * 
      * @return List of parking lots.
      */
     public ArrayList<ParkingLot> getParkingLots() {
@@ -270,12 +284,14 @@ public class Database {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length < 2) continue;
+                if (data.length < 2)
+                    continue;
 
                 String lotId = data[0];
                 boolean isDisabled = Boolean.parseBoolean(data[1]);
                 ParkingLot parkingLot = new ParkingLot(lotId);
-                if (isDisabled) parkingLot.disable();
+                if (isDisabled)
+                    parkingLot.disable();
                 parkingLots.add(parkingLot);
             }
         } catch (IOException e) {
@@ -286,7 +302,8 @@ public class Database {
 
     /**
      * Updates the parking lot's status in the CSV file.
-     * @param lotId The ID of the parking lot.
+     * 
+     * @param lotId      The ID of the parking lot.
      * @param isDisabled New status of the parking lot.
      */
     public void updateParkingLotStatus(String lotId, boolean isDisabled) {
@@ -307,6 +324,7 @@ public class Database {
 
     /**
      * Removes a parking lot from the CSV file.
+     * 
      * @param lotId The ID of the parking lot to remove.
      */
     public void removeParkingLot(String lotId) {
@@ -325,11 +343,13 @@ public class Database {
     /**
      * Saves a booking to the CSV file.
      * Excludes the ParkingSpace object.
+     * 
      * @param booking The booking object to store.
      */
     /**
      * Saves a booking to the CSV file.
      * Excludes the ParkingSpace object.
+     * 
      * @param booking The booking object to store.
      */
     public void addBooking(Booking booking) {
@@ -352,8 +372,7 @@ public class Database {
                     booking.getStartTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
                     booking.getEndTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
                     booking.isPaid(),
-                    booking.isCancelled()
-            );
+                    booking.isCancelled());
             bw.write(bookingData);
             System.out.println("Booking added successfully.");
         } catch (IOException e) {
@@ -363,6 +382,7 @@ public class Database {
 
     /**
      * Retrieves all bookings from the CSV file.
+     * 
      * @return List of Booking objects.
      */
     public ArrayList<Booking> getBookings() {
@@ -371,7 +391,8 @@ public class Database {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length < 7) continue; // Ensure valid format
+                if (data.length < 7)
+                    continue; // Ensure valid format
 
                 String bookingId = data[0];
                 String username = data[1];
@@ -383,8 +404,10 @@ public class Database {
 
                 ParkingSpace parkingSpace = new ParkingSpace(parkingSpaceID, "lot-1"); // Dummy ParkingSpace
                 Booking booking = new Booking(bookingId, username, parkingSpaceID, parkingSpace, startTime, endTime);
-                if (isPaid) booking.markAsPaid();
-                if (isCancelled) booking.cancelBooking();
+                if (isPaid)
+                    booking.markAsPaid();
+                if (isCancelled)
+                    booking.cancelBooking();
 
                 bookings.add(booking);
             }
@@ -396,6 +419,7 @@ public class Database {
 
     /**
      * Marks a booking as paid and updates the CSV file.
+     * 
      * @param bookingId The booking ID to update.
      */
     public void markBookingAsPaid(String bookingId) {
@@ -414,6 +438,7 @@ public class Database {
 
     /**
      * Cancels a booking and updates the CSV file.
+     * 
      * @param bookingId The booking ID to cancel.
      */
     public void cancelBooking(String bookingId) {
@@ -432,6 +457,7 @@ public class Database {
 
     /**
      * Serializes a Booking object into a CSV string.
+     * 
      * @param booking The booking to serialize.
      * @return CSV formatted string.
      */
@@ -443,8 +469,7 @@ public class Database {
                 booking.getStartTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
                 booking.getEndTime().format(DateTimeFormatter.ISO_LOCAL_TIME),
                 booking.isPaid(),
-                booking.isCancelled()
-        );
+                booking.isCancelled());
     }
 
     /**
@@ -474,8 +499,7 @@ public class Database {
         return userBookings;
     }
 
-
-    //Method to pass the User Information from the Login page to UserDashboard
+    // Method to pass the User Information from the Login page to UserDashboard
     public User getUserByUsername(String username) {
         ArrayList<User> users = getUsers();
         for (User user : users) {
@@ -484,5 +508,32 @@ public class Database {
             }
         }
         return null; // Return null if user not found
+    }
+
+    public void updateBookingPaymentStatus(String bookingId, boolean isPaid) {
+        List<String> lines = new ArrayList<>();
+        String filePath = "bookings.csv";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equals(bookingId)) {
+                    // Update isPaid status (6th column)
+                    parts[5] = String.valueOf(isPaid);
+                    line = String.join(",", parts);
+                }
+                lines.add(line);
+            }
+
+            // Write back to file
+            try (FileWriter writer = new FileWriter(filePath)) {
+                for (String updatedLine : lines) {
+                    writer.write(updatedLine + "\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
