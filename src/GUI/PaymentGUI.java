@@ -6,10 +6,11 @@ import HelperFunctions.ReciptDecorator;
 import Models.Booking;
 import Models.Card;
 import Models.User;
-
+import Database.Database;
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDateTime;
+import java.time.Duration;
+import java.time.LocalTime;
 
 public class PaymentGUI extends JFrame {
     private JTextField cardNumberField;
@@ -21,6 +22,7 @@ public class PaymentGUI extends JFrame {
     private JTextField amountField;
     private User currentUser;
     private Booking booking;
+    private Database database;
     private static final String VALID_TEST_CARD = "111";
     private static final String VALID_TEST_CVV = "123";
     private static final int VALID_TEST_EXPIRY = 2025;
@@ -28,55 +30,54 @@ public class PaymentGUI extends JFrame {
     public PaymentGUI(User user, Booking booking) {
         this.currentUser = user;
         this.booking = booking;
-
-        // Calculate amount based on user type and duration
-        double hourlyRate = currentUser.getUserType().getParkingRate();
-        Rate(); // The user type is given here
-        double amount = booking.calculateAmount(hourlyRate);
+        database = Database.getInstance();
 
         setTitle("Payment Processing");
-        setSize(600, 400);
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
         // Create main panel with padding
-        JPanel mainPanel = new JPanel(new GridLayout(8, 2, 10, 10));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel inputPanel = new JPanel(new GridLayout(12, 4, 10, 10));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
         // Add components
-        mainPanel.add(new JLabel("Card Number:"));
+        inputPanel.add(new JLabel("Card Number:"));
         cardNumberField = new JTextField();
-        mainPanel.add(cardNumberField);
+        inputPanel.add(cardNumberField);
 
-        mainPanel.add(new JLabel("Card Holder Name:"));
-        cardHolderField = new JTextField();
-        mainPanel.add(cardHolderField);
+        inputPanel.add(new JLabel("Card Holder Name:"));
+        cardHolderField = new JTextField(user.getUsername());
+        cardHolderField.setEditable(false);
+        inputPanel.add(cardHolderField);
 
-        mainPanel.add(new JLabel("Billing Address:"));
+        inputPanel.add(new JLabel("Billing Address:"));
         addressField = new JTextField();
-        mainPanel.add(addressField);
+        inputPanel.add(addressField);
 
-        mainPanel.add(new JLabel("Card Type:"));
+        inputPanel.add(new JLabel("Card Type:"));
         String[] cardTypes = { "VISA", "MasterCard", "American Express" };
         cardTypeCombo = new JComboBox<>(cardTypes);
-        mainPanel.add(cardTypeCombo);
+        inputPanel.add(cardTypeCombo);
 
-        mainPanel.add(new JLabel("CVV:"));
+        inputPanel.add(new JLabel("CVV:"));
         cvvField = new JTextField();
-        mainPanel.add(cvvField);
+        inputPanel.add(cvvField);
 
-        mainPanel.add(new JLabel("Expiry Year:"));
+        inputPanel.add(new JLabel("Expiry Year:"));
         expiryYearField = new JTextField();
-        mainPanel.add(expiryYearField);
+        inputPanel.add(expiryYearField);
 
-        mainPanel.add(new JLabel("Amount:"));
-        amountField = new JTextField(String.format("%.2f", amount));
+        // Calculate and display amount
+        double hours = calculateDurationInHours(booking.getStartTime(), booking.getEndTime());
+        double hourlyRate = getHourlyRateForUser(user);
+        double amount = hours * hourlyRate;
+
+        inputPanel.add(new JLabel("Amount:"));
+        amountField = new JTextField(String.format("$%.2f", amount));
         amountField.setEditable(false);
-        mainPanel.add(amountField);
+        inputPanel.add(amountField);
 
-        // Pre-fill card holder name
-        cardHolderField.setText(user.getUsername());
-        cardHolderField.setEditable(false);
 
         // Add process payment button
         JButton processButton = new JButton("Process Payment");
@@ -86,93 +87,128 @@ public class PaymentGUI extends JFrame {
         buttonPanel.add(processButton);
 
         // Add panels to frame
-        add(mainPanel, BorderLayout.CENTER);
+        add(inputPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
         setVisible(true);
     }
 
+    private double getHourlyRateForUser(User user) {
+        // Get user type from database
+        String userType = database.getUserType(user.getUsername());
+
+        // Return rate based on user type
+        switch(userType.toLowerCase()) {
+            case "visitor": return 15.0;
+            case "student": return 5.0;
+            case "staff": return 10.0;
+            case "faculty": return 8.0;
+            default: return 15.0; // default to visitor rate
+        }
+    }
+
+    private double calculateDurationInHours(LocalTime start, LocalTime end) {
+        long minutes = Duration.between(start, end).toMinutes();
+        return minutes / 60.0; // Convert to hours with decimal
+    }
+
     private void processPayment() {
         try {
-            if (validateFields()) {
-                Card card = new Card(
-                        cardNumberField.getText(),
-                        currentUser,
-                        addressField.getText(),
-                        cardTypeCombo.getSelectedItem().toString(),
-                        Integer.parseInt(cvvField.getText()),
-                        Integer.parseInt(expiryYearField.getText()));
+            if (!validateFields()) return;
 
-                PaymentMethod payment = new CardPayment(
-                        Float.parseFloat(amountField.getText()),
-                        card);
-                PaymentMethod paymentWithReceipt = new ReciptDecorator(payment);
 
-                boolean success = paymentWithReceipt.processPayment();
-                if (success) {
-                    // Update booking status in memory
-                    booking.markAsPaid();
+            double hours = calculateDurationInHours(booking.getStartTime(), booking.getEndTime());
+            double rate = getHourlyRateForUser(currentUser);
+            float amount = (float)(hours * rate);
 
-                    // Update booking status in CSV file
-                    Database.getInstance().updateBookingPaymentStatus(booking.getBookingId(), true);
+            //If test values match, approve
+            if (cardNumberField.getText().trim().equals(VALID_TEST_CARD) &&
+                    cvvField.getText().trim().equals(VALID_TEST_CVV) &&
+                    expiryYearField.getText().trim().equals(String.valueOf(VALID_TEST_EXPIRY))) {
 
-                    JOptionPane.showMessageDialog(this,
-                            "Payment processed successfully!\nAmount: $" + amountField.getText(),
-                            "Success",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this,
-                            "Payment processing failed. Please try again.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
+
+                booking.markAsPaid();
+                Database db = Database.getInstance();
+                db.updateBookingPaymentStatus(booking.getBookingId(), true);
+                db.markBookingAsPaid(booking.getBookingId());
+
+                JOptionPane.showMessageDialog(this,
+                        "TEST PAYMENT APPROVED\nAmount: $" + String.format("%.2f", amount),
+                        "Success", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                return;
             }
-        } catch (NumberFormatException e) {
+
+            // Original payment processing (will only reach here if test values don't match)
+            Card card = new Card(
+                    cardNumberField.getText().trim(),
+                    currentUser,
+                    addressField.getText(),
+                    cardTypeCombo.getSelectedItem().toString(),
+                    Integer.parseInt(cvvField.getText().trim()),
+                    Integer.parseInt(expiryYearField.getText().trim())
+            );
+
+            PaymentMethod payment = new CardPayment(amount, card);
+            PaymentMethod paymentWithReceipt = new ReciptDecorator(payment);
+
+            if (paymentWithReceipt.processPayment()) {
+                booking.markAsPaid();
+                Database.getInstance().updateBookingPaymentStatus(booking.getBookingId(), true);
+                JOptionPane.showMessageDialog(this,
+                        "Payment successful!\nAmount: $" + String.format("%.2f", amount),
+                        "Success", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                throw new Exception("Payment processor rejected the transaction");
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                    "Please enter valid numeric values.",
-                    "Input Error",
-                    JOptionPane.ERROR_MESSAGE);
+                    "Payment failed: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private boolean validateFields() {
-        // Validate card number against test value
-        if (!cardNumberField.getText().trim().equals(VALID_TEST_CARD)) {
-            JOptionPane.showMessageDialog(this,
-                    "Invalid card number. Use test card: " + VALID_TEST_CARD,
-                    "Validation Error",
-                    JOptionPane.ERROR_MESSAGE);
+
+        String testCard = cardNumberField.getText().trim();
+        String testCVV = cvvField.getText().trim();
+        String testExpiry = expiryYearField.getText().trim();
+
+        // Validate card number matches test value
+        if (!testCard.equals(VALID_TEST_CARD)) {
+            showError("Invalid card number", "For testing, use card: " + VALID_TEST_CARD);
             return false;
         }
 
-        // Validate CVV against test value
-        if (!cvvField.getText().trim().equals(VALID_TEST_CVV)) {
-            JOptionPane.showMessageDialog(this,
-                    "Invalid CVV. Use test CVV: " + VALID_TEST_CVV,
-                    "Validation Error",
-                    JOptionPane.ERROR_MESSAGE);
+        // Validate CVV matches test value
+        if (!testCVV.equals(VALID_TEST_CVV)) {
+            showError("Invalid CVV", "For testing, use CVV: " + VALID_TEST_CVV);
             return false;
         }
 
-        // Validate expiry year against test value
+        // Validate expiry year matches test value
         try {
-            int expiryYear = Integer.parseInt(expiryYearField.getText().trim());
+            int expiryYear = Integer.parseInt(testExpiry);
             if (expiryYear != VALID_TEST_EXPIRY) {
-                JOptionPane.showMessageDialog(this,
-                        "Invalid expiry year. Use test year: " + VALID_TEST_EXPIRY,
-                        "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
+                showError("Invalid expiry year", "For testing, use year: " + VALID_TEST_EXPIRY);
                 return false;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Please enter a valid expiry year.",
-                    "Validation Error",
-                    JOptionPane.ERROR_MESSAGE);
+            showError("Invalid expiry year", "Must be a valid 4-digit year");
+            return false;
+        }
+
+        // Additional validations
+        if (addressField.getText().trim().isEmpty()) {
+            showError("Missing Information", "Billing address cannot be empty");
             return false;
         }
 
         return true;
+    }
+
+    private void showError(String title, String message) {
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
     }
 }

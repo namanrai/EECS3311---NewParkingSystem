@@ -20,7 +20,7 @@ public class UserDashboard extends JFrame {
 
 
         setTitle("User Dashboard - " + user.getUsername());
-        setSize(1000, 800);
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -86,7 +86,7 @@ public class UserDashboard extends JFrame {
         DefaultListModel<String> availableSpacesList = new DefaultListModel<>();
         for (int i = 1; i <= 100; i++) {
             String spaceId = "Space-" + i;
-            if (isSpaceAvailable(selectedLot, spaceId)) {
+            if (isSpaceAvailable(spaceId)) {
                 availableSpacesList.addElement(spaceId);
             }
         }
@@ -118,7 +118,7 @@ public class UserDashboard extends JFrame {
         spaceDialog.setVisible(true);
     }
 
-    private boolean isSpaceAvailable(String lotId, String spaceId) {
+    private boolean isSpaceAvailable(String spaceId) {
         //method to check for available spaces
         List<Booking> bookings = database.getBookings();
 
@@ -195,7 +195,7 @@ public class UserDashboard extends JFrame {
         if (confirm == JOptionPane.YES_OPTION) {
             database.cancelBooking(bookingId);
             loadBookings(); // Refresh the list
-            JOptionPane.showMessageDialog(this, "Booking cancelled successfully");
+            JOptionPane.showMessageDialog(this, "Booking cancelled successfully. Refund is being processed.");
         }
     }
 

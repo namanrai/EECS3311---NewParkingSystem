@@ -1,7 +1,10 @@
 package GUI;
 
+import Database.Database;
+import Models.Booking;
 import Models.User;
 import Models.ParkingSpace;
+import Database.Database;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,39 +16,43 @@ public class BookingGUI extends JFrame {
     private User user;
     private String selectedLot;
     private String spaceId;
+    private Database database;
 
     public BookingGUI(User user, String selectedLot, String spaceId) {
         this.user = user;
         this.selectedLot = selectedLot;
         this.spaceId = spaceId;
+        database = Database.getInstance();
 
         setTitle("Booking Parking Space");
-        setSize(400, 300);
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
 
         // Panel for displaying user and parking space information
-        JPanel panel = new JPanel(new GridLayout(4, 2));
+        JPanel inputPanel = new JPanel(new GridLayout(12, 4, 10, 10));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-        panel.add(new JLabel("Username:"));
-        panel.add(new JLabel(user.getUsername())); // Display username
+        inputPanel.add(new JLabel("Username:"));
+        inputPanel.add(new JLabel(user.getUsername())); // Display username
 
-        panel.add(new JLabel("License Plate:"));
-        panel.add(new JLabel(user.getLicensePlate())); // Display license plate
+        inputPanel.add(new JLabel("License Plate:"));
+        inputPanel.add(new JLabel(user.getLicensePlate())); // Display license plate
 
-        panel.add(new JLabel("Parking Space:"));
-        panel.add(new JLabel(spaceId)); // Display parking space ID
+        inputPanel.add(new JLabel("Parking Space:"));
+        inputPanel.add(new JLabel(spaceId)); // Display parking space ID
 
         // Time input fields
         JLabel startLabel = new JLabel("Start Time (HH:mm):");
         JTextField startTimeField = new JTextField();
-        panel.add(startLabel);
-        panel.add(startTimeField);
+        inputPanel.add(startLabel);
+        inputPanel.add(startTimeField);
 
         JLabel endLabel = new JLabel("End Time (HH:mm):");
         JTextField endTimeField = new JTextField();
-        panel.add(endLabel);
-        panel.add(endTimeField);
+        inputPanel.add(endLabel);
+        inputPanel.add(endTimeField);
 
         // Button to confirm the booking
         JButton bookButton = new JButton("Proceed to Payment");
@@ -65,10 +72,12 @@ public class BookingGUI extends JFrame {
                     } else {
                         // Make the booking
                         ParkingSpace parkingSpace = new ParkingSpace(spaceId, selectedLot);
-                        String bookingId = "Booking-" + System.currentTimeMillis(); // Unique booking ID
-                        user.makeBooking(bookingId, user.getUsername(), spaceId, parkingSpace, startTime, endTime);
+                        String bookingId = "BK-" + System.currentTimeMillis();
+                        Booking booking = new Booking(bookingId, user.getUsername(), spaceId, parkingSpace, startTime, endTime);
+                        Database.getInstance().addBooking(booking);
 
-                        JOptionPane.showMessageDialog(BookingGUI.this, "Payment GUI here");
+                        // Open PaymentGUI with user and booking
+                        new PaymentGUI(user, booking);
                         dispose(); // Close the booking window
                     }
                 } catch (Exception ex) {
@@ -78,8 +87,8 @@ public class BookingGUI extends JFrame {
         });
 
         // Add components to the frame
-        panel.add(bookButton);
-        add(panel, BorderLayout.CENTER);
+        inputPanel.add(bookButton);
+        add(inputPanel, BorderLayout.CENTER);
 
         setVisible(true);
     }

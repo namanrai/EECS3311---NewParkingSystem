@@ -15,8 +15,8 @@ public class ManagerVal extends JFrame {
 
     public ManagerVal() {
         setTitle("Manager Val Dashboard");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 800);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         usersModel = new DefaultListModel<>();

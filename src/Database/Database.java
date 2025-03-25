@@ -536,4 +536,13 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public String getUserType(String username) {
+        for (User user : getUsers()) {
+            if (user.getUsername().equals(username)) {
+                return user.getClass().getSimpleName().toLowerCase();
+            }
+        }
+        return "visitor"; // default
+    }
 }

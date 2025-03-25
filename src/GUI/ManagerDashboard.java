@@ -18,7 +18,7 @@ public class ManagerDashboard extends JFrame {
 
     public ManagerDashboard() {
         setTitle("Manager Dashboard");
-        setSize(600, 400);
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -39,12 +39,20 @@ public class ManagerDashboard extends JFrame {
         JButton manageSpacesButton = new JButton("Manage Spaces");
         JButton openValidationDashboardButton = new JButton("Open Validation Dashboard");
 
-        JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 10, 10));
+        JPanel buttonPanel = new JPanel(new GridLayout(12, 4, 10, 10));
         buttonPanel.add(addLotButton);
         buttonPanel.add(removeLotButton);
         buttonPanel.add(toggleLotButton);
         buttonPanel.add(manageSpacesButton);
         buttonPanel.add(openValidationDashboardButton);
+
+        // Logout Button
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(e -> {
+            dispose(); // Close the dashboard
+            new Login().setVisible(true);
+        });
+        add(logoutButton, BorderLayout.SOUTH);
 
         panel.add(buttonPanel, BorderLayout.EAST);
         add(panel);
@@ -166,7 +174,7 @@ public class ManagerDashboard extends JFrame {
             spacePanel.add(toggleSpaceButton, BorderLayout.SOUTH);
 
             JFrame spaceFrame = new JFrame("Manage Spaces - " + lotName);
-            spaceFrame.setSize(400, 300);
+            spaceFrame.setSize(400, 500);
             spaceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             spaceFrame.add(spacePanel);
             spaceFrame.setVisible(true);
