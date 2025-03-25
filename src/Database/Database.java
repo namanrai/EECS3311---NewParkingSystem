@@ -473,4 +473,16 @@ public class Database {
         // Return the filtered list of bookings that belong to the specified user
         return userBookings;
     }
+
+
+    //Method to pass the User Information from the Login page to UserDashboard
+    public User getUserByUsername(String username) {
+        ArrayList<User> users = getUsers();
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user; // Return the user if found
+            }
+        }
+        return null; // Return null if user not found
+    }
 }
