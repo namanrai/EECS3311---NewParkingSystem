@@ -545,4 +545,14 @@ public class Database {
         }
         return "visitor"; // default
     }
+
+    public Booking findBookingById(String bookingId) {
+        for (Booking booking : database.getBookings()) {
+            if (booking.getBookingId().equals(bookingId)) {
+                return booking;
+            }
+        }
+        return null;
+    }
+
 }

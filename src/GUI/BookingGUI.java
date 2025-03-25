@@ -35,13 +35,13 @@ public class BookingGUI extends JFrame {
         inputPanel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
         inputPanel.add(new JLabel("Username:"));
-        inputPanel.add(new JLabel(user.getUsername())); // Display username
+        inputPanel.add(new JLabel(user.getUsername()));
 
         inputPanel.add(new JLabel("License Plate:"));
-        inputPanel.add(new JLabel(user.getLicensePlate())); // Display license plate
+        inputPanel.add(new JLabel(user.getLicensePlate()));
 
         inputPanel.add(new JLabel("Parking Space:"));
-        inputPanel.add(new JLabel(spaceId)); // Display parking space ID
+        inputPanel.add(new JLabel(spaceId));
 
         // Time input fields
         JLabel startLabel = new JLabel("Start Time (HH:mm):");

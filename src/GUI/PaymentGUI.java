@@ -23,6 +23,7 @@ public class PaymentGUI extends JFrame {
     private User currentUser;
     private Booking booking;
     private Database database;
+    private double amount;
     private static final String VALID_TEST_CARD = "111";
     private static final String VALID_TEST_CVV = "123";
     private static final int VALID_TEST_EXPIRY = 2025;
@@ -71,10 +72,10 @@ public class PaymentGUI extends JFrame {
         // Calculate and display amount
         double hours = calculateDurationInHours(booking.getStartTime(), booking.getEndTime());
         double hourlyRate = getHourlyRateForUser(user);
-        double amount = hours * hourlyRate;
+        this.amount = hours * hourlyRate;
 
         inputPanel.add(new JLabel("Amount:"));
-        amountField = new JTextField(String.format("$%.2f", amount));
+        amountField = new JTextField(String.format("$%.2f", this.amount));
         amountField.setEditable(false);
         inputPanel.add(amountField);
 
@@ -117,9 +118,7 @@ public class PaymentGUI extends JFrame {
             if (!validateFields()) return;
 
 
-            double hours = calculateDurationInHours(booking.getStartTime(), booking.getEndTime());
-            double rate = getHourlyRateForUser(currentUser);
-            float amount = (float)(hours * rate);
+            float paymentAmount = (float)this.amount;
 
             //If test values match, approve
             if (cardNumberField.getText().trim().equals(VALID_TEST_CARD) &&
@@ -133,7 +132,7 @@ public class PaymentGUI extends JFrame {
                 db.markBookingAsPaid(booking.getBookingId());
 
                 JOptionPane.showMessageDialog(this,
-                        "TEST PAYMENT APPROVED\nAmount: $" + String.format("%.2f", amount),
+                        "TEST PAYMENT APPROVED\nAmount: $" + String.format("%.2f", paymentAmount),
                         "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 return;
@@ -149,14 +148,14 @@ public class PaymentGUI extends JFrame {
                     Integer.parseInt(expiryYearField.getText().trim())
             );
 
-            PaymentMethod payment = new CardPayment(amount, card);
+            PaymentMethod payment = new CardPayment(paymentAmount, card);
             PaymentMethod paymentWithReceipt = new ReciptDecorator(payment);
 
             if (paymentWithReceipt.processPayment()) {
                 booking.markAsPaid();
                 Database.getInstance().updateBookingPaymentStatus(booking.getBookingId(), true);
                 JOptionPane.showMessageDialog(this,
-                        "Payment successful!\nAmount: $" + String.format("%.2f", amount),
+                        "Payment successful!\nAmount: $" + String.format("%.2f", paymentAmount),
                         "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } else {

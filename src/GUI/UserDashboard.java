@@ -142,11 +142,15 @@ public class UserDashboard extends JFrame {
         JButton cancelButton = new JButton("Cancel Booking");
         cancelButton.addActionListener(e -> cancelBooking());
 
+        JButton editButton = new JButton("Edit Booking");
+        editButton.addActionListener(e -> editBooking());
+
         JButton refreshButton = new JButton("Refresh");
         refreshButton.addActionListener(e -> loadBookings());
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(cancelButton);
+        buttonPanel.add(editButton);
         buttonPanel.add(refreshButton);
 
         panel.add(new JLabel("Your Bookings:", SwingConstants.CENTER), BorderLayout.NORTH);
@@ -193,10 +197,57 @@ public class UserDashboard extends JFrame {
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
+            Booking booking = database.findBookingById(bookingId);
+            if (booking != null && booking.isPaid()) {
+                // Process refund for paid bookings
+                JOptionPane.showMessageDialog(this,
+                        "Booking cancelled successfully. Refund is being processed.");
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Booking cancelled successfully.");
+            }
+
+            // Remove from database
             database.cancelBooking(bookingId);
             loadBookings(); // Refresh the list
-            JOptionPane.showMessageDialog(this, "Booking cancelled successfully. Refund is being processed.");
         }
     }
+
+    private void editBooking() {
+        int selectedIndex = bookingsList.getSelectedIndex();
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a booking first");
+            return;
+        }
+
+        String selected = bookingsList.getSelectedValue();
+        String bookingId = selected.split(" \\| ")[0];
+        Booking booking = database.findBookingById(bookingId);
+
+        if (booking == null) {
+            JOptionPane.showMessageDialog(this, "Booking not found");
+            return;
+        }
+
+        //edit method basically -> selects the old booking from list -> removes it from db -> creates a new booking instance
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Create new booking for " + booking.getParkingSpace().getId() + "?",
+                "Confirm New Booking",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            database.cancelBooking(bookingId);
+
+
+            new BookingGUI(user, booking.getParkingSpace().getLocation(), booking.getParkingSpace().getId());
+
+
+            loadBookings();
+        }
+    }
+
+
 
 }
