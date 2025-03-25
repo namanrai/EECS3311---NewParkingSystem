@@ -107,7 +107,7 @@ public class UserDashboard extends JFrame {
             String spaceId = spacesList.getSelectedValue();
             if (spaceId != null) {
                 spaceDialog.dispose();
-//                new BookingGUI(user, selectedLot, spaceId); // Open booking form
+               new BookingGUI(user, selectedLot, spaceId); // Open booking GUI
             } else {
                 JOptionPane.showMessageDialog(spaceDialog, "Please select a space first");
             }
