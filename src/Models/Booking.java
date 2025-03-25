@@ -2,19 +2,22 @@ package Models;
 
 import DesignPatterns.state.*; // Importing state pattern
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Booking {
     private String bookingId;
-    private User user;
+    private String username;
+    private String parkingSpaceID;
     private ParkingSpace parkingSpace;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private boolean isPaid;
     private boolean isCancelled;
 
-    public Booking(String bookingId, User user, ParkingSpace parkingSpace, LocalDateTime startTime, LocalDateTime endTime) {
+    public Booking(String bookingId, String username, String parkingSpaceID, ParkingSpace parkingSpace, LocalTime startTime, LocalTime endTime) {
         this.bookingId = bookingId;
-        this.user = user;
+        this.username = username;
+        this.parkingSpaceID = parkingSpace.getId();
         this.parkingSpace = parkingSpace;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -27,19 +30,23 @@ public class Booking {
         return bookingId;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
+    }
+
+    public String getParkingSpaceID() {
+        return parkingSpaceID;
     }
 
     public ParkingSpace getParkingSpace() {
         return parkingSpace;
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
@@ -70,7 +77,7 @@ public class Booking {
     }
 
     // Extend booking time (Only if new end time is later than the current one)
-    public void extendBooking(LocalDateTime newEndTime) {
+    public void extendBooking(LocalTime newEndTime) {
         if (newEndTime.isAfter(this.endTime)) {
             this.endTime = newEndTime;
             System.out.println("Booking extended successfully.");

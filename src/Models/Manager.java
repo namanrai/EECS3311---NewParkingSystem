@@ -3,6 +3,8 @@ import DesignPatterns.ParkingProxy;
 
 import Database.Database;
 import DesignPatterns.ParkingProxy;
+
+import java.util.List;
 import java.util.Random;
 import java.io.*;
 import java.util.ArrayList;
@@ -182,6 +184,10 @@ public class Manager {
 
     public String getPassword(){
         return password;
+    }
+
+    public List<ParkingLot> getParkingLot() {
+        return access.getParkingLots();
     }
 
 }

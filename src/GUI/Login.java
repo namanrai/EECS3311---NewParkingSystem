@@ -1,6 +1,8 @@
 package GUI;
 
 import Database.Database;
+import Models.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -71,7 +73,7 @@ public class Login extends JFrame {
     private void login() {
         String username = usernameField.getText().trim();
         String password = new String(passwordField.getPassword()).trim();
-        String userType = (String) accessType.getSelectedItem();
+        String accessType = (String) this.accessType.getSelectedItem();
 
         // Validate input fields
         if (username.isEmpty() || password.isEmpty()) {
@@ -81,7 +83,7 @@ public class Login extends JFrame {
 
         // Validate credentials
         boolean isValid = false;
-        switch (userType) {
+        switch (accessType) {
             case "User":
                 isValid = database.validUser(username, password);
                 break;
@@ -96,42 +98,40 @@ public class Login extends JFrame {
                 return;
         }
 
-        // Handle login result
+
         if (isValid) {
-            JOptionPane.showMessageDialog(this, "Login successful! Welcome, " + username + ".");
-            openDashboard(userType);
-        } else {
+            this.dispose();
+
+            switch (accessType) {
+                case "User":
+                    User user = database.getUserByUsername(username); //passing the User Object to the dashboard
+                    if (user != null) {
+                        new UserDashboard(user);
+                    }
+                    break;
+                case "Manager":
+                    new ManagerDashboard();
+                    break;
+                case "SuperManager":
+                    new SuperManagerDashboard();
+                    break;
+            }
+        }
+        else {
             JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+
+
     // Method to open the registration form
     private void openRegister() {
         // Create a new registration
-        System.out.println("Register button clicked!"); // Debugging statement
+        System.out.println("Register button clicked!");
         new Register();
     }
 
 
-    private void openDashboard(String userType) {
-        // Close the login window
-        this.dispose();
-
-        // Open the appropriate dashboard
-        switch (userType) {
-            case "User":
-//                new UserDashboard();
-                break;
-            case "Manager":
-//                new ManagerDashboard();
-                break;
-            case "SuperManager":
-                new SuperManagerDashboard();
-                break;
-            default:
-                JOptionPane.showMessageDialog(this, "Select a user type.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
     public static void main(String[] args) {
         // Run the login page

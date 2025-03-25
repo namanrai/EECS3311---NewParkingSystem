@@ -29,7 +29,6 @@ public class ParkingProxy {
 
     //removes parkinglot from list
     public void removeParkingLot(String lotID) {
-        //Database.getInstance().removeParkingLot(lotID);
 
         if (isManager) {
             ParkingLot lotToRemove = null;
