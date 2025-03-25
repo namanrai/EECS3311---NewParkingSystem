@@ -7,8 +7,6 @@ import Models.SuperManager;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SuperManagerDashboard extends JFrame {
@@ -30,7 +28,7 @@ public class SuperManagerDashboard extends JFrame {
         // Add Panels
         tabbedPane.addTab("Create Manager", createManagerPanel());
         tabbedPane.addTab("View Managers", viewManagersPanel());
-//        tabbedPane.addTab("Manage Parking Lots", manageParkingLotsPanel());
+        tabbedPane.addTab("Manager Dashboard", managerDashboardPanel());
 
         // Logout Button
         JButton logoutButton = new JButton("Logout");
@@ -39,6 +37,7 @@ public class SuperManagerDashboard extends JFrame {
             new Login().setVisible(true);
         });
         add(logoutButton, BorderLayout.SOUTH);
+
         setVisible(true);
     }
 
@@ -106,6 +105,20 @@ public class SuperManagerDashboard extends JFrame {
         // Initial Data Load
         refreshButton.doClick(); // Simulate a click to load data initially
 
+        return panel;
+    }
+
+    // Panel for Opening Manager Dashboard
+    private JPanel managerDashboardPanel() {
+        JPanel panel = new JPanel(new FlowLayout());
+
+        JButton openManagerDashboardButton = new JButton("Open Management system");
+        openManagerDashboardButton.addActionListener(e -> {
+            dispose(); // Close current SuperManagerDashboard
+            new ManagerDashboard().setVisible(true); // Open Manager Dashboard
+        });
+
+        panel.add(openManagerDashboardButton);
         return panel;
     }
 
