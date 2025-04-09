@@ -71,7 +71,7 @@ public class VisitorTest {
     @Test
     public void testMakeBookingCreatesNonNullObject() {
         // Dummy data
-        ParkingSpace space = new ParkingSpace("P1","1");
+        ParkingSpace space = new ParkingSpace("P1","Test");
         LocalTime start = LocalTime.of(10, 0);
         LocalTime end = LocalTime.of(11, 0);
 
