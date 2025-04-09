@@ -12,13 +12,13 @@ public class Staff extends User {
     private ParkingSpace parkingSpace;
     private String username;
     private ArrayList<Booking> bookings;
-    private boolean isValidated = false;
 
     public Staff(String name, String email, String password, String licensePlate) {
         this.username = name;
         this.email = email;
         this.password = password;
         this.licensePlate = licensePlate;
+        setValidated(false);
     }
 
     public double getParkingRate() {
