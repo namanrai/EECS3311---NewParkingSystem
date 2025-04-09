@@ -5,3 +5,5 @@ BK-1742887146803,smith,Space-12,05:55:00,07:43:00,true,false
 BK-1742921584309,boss,Space-13,05:00:00,08:00:00,true,false
 1,ahmad,Lot-A-1,22:17:37.8585571,00:00:00,true,false
 B1,john,P1,10:00:00,11:00:00,false,false
+SB1,bob,S1,08:00:00,09:30:00,false,false
+TB1,chris,ST1,07:30:00,08:30:00,false,false
