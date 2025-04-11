@@ -1,7 +1,3 @@
-2,smith,Lot-A-1,18:57:45.1240447,00:00:00,true,false
-BK-1742886113731,smith,Space-6,08:30:00,11:30:00,true,false
-BK-1742886767817,smith,Space-17,05:44:00,06:44:00,false,false
-BK-1742887146803,smith,Space-12,05:55:00,07:43:00,true,false
-BK-1742921584309,boss,Space-13,05:00:00,08:00:00,true,false
-BK-1742925566424,Newuser,Space-1,10:00:00,12:00:00,false,false
-BK-1742926509120,Newuser1,Space-2,03:00:00,06:00:00,false,false
+B1,alice,F1,09:00:00,10:00:00,false,false
+SB1,bob,S1,08:00:00,09:30:00,false,false
+TB1,chris,ST1,07:30:00,08:30:00,false,false

@@ -12,13 +12,13 @@ public class Visitor extends User {
     private ParkingSpace parkingSpace;
     private String username;
     private ArrayList<Booking> bookings;
-    private boolean isValidated = true;
 
     public Visitor(String name, String email, String password, String licensePlate) {
         this.username = name;
         this.email = email;
         this.password = password;
         this.licensePlate = licensePlate;
+        setValidated(true);
     }
 
     public double getParkingRate() {
