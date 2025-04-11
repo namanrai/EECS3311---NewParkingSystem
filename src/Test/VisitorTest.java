@@ -1,10 +1,14 @@
 package Test;
 
+import Database.Database;
 import Models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,5 +83,31 @@ public class VisitorTest {
         assertNotNull(booking);
         assertEquals("B1", booking.getBookingId());
         assertEquals("john", booking.getUsername());
+    }
+
+    @Test
+    public void testRegisterAccount_Success() throws IOException {
+        // Step 1: Clear users.csv
+        new FileWriter("users.csv").close();
+
+        // Step 2: Create and register visitor
+        Visitor visitor = new Visitor("john", "john@example.com", "StrongPass123!", "ABC123");
+        boolean result = visitor.registerAccount("john", "StrongPass123!");
+
+        // Step 3: Verify registration was successful
+        assertTrue(result);
+
+        // Step 4: Verify the user was added to the CSV via Database
+        Database db = Database.getInstance();
+        ArrayList<User> users = db.getUsers();
+
+        assertEquals(1, users.size());
+
+        User addedUser = users.get(0);
+        assertEquals("john", addedUser.getUsername());
+        assertEquals("john@example.com", addedUser.getEmail());
+        assertEquals("ABC123", addedUser.getLicensePlate());
+        assertEquals("visitor", db.getUserType("john"));
+        assertTrue(addedUser.getisValidated());
     }
 }
