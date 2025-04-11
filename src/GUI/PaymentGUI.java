@@ -155,7 +155,7 @@ public class PaymentGUI extends JFrame {
                 booking.markAsPaid();
                 Database.getInstance().updateBookingPaymentStatus(booking.getBookingId(), true);
                 JOptionPane.showMessageDialog(this,
-                        "Payment successful!\nAmount: $" + String.format("%.2f", paymentAmount),
+                        "Payment successful!\nAmount: $" + String.format("%.2f", amount),
                         "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } else {
