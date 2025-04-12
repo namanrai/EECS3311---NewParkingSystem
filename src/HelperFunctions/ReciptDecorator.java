@@ -20,6 +20,11 @@ public class ReciptDecorator extends PaymentDecorator {
         return result;
     }
 
+    @Override
+    public String pay(double amount) {
+        return "";
+    }
+
     private void generateReceipt() {
         System.out.println("Receipt Generated:");
         System.out.println("Receipt #: " + receiptNumber);

@@ -21,4 +21,6 @@ public abstract class PaymentMethod {
     protected void setAmount(float amount) {
         this.amount = amount;
     }
+
+    public abstract String pay(double amount);
 }

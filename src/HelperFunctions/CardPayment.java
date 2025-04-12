@@ -31,6 +31,11 @@ public class CardPayment extends PaymentMethod {
         return success;
     }
 
+    @Override
+    public String pay(double amount) {
+        return "";
+    }
+
     public Card getCard() {
         return card;
     }
