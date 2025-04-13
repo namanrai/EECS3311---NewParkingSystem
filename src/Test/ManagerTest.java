@@ -30,8 +30,7 @@ public class ManagerTest {
     void setUp(){
         proxyTest = new ParkingProxy(true);
         managerTest = new Manager(proxyTest);
-        String userGen = managerTest.getUsername();
-        String userPassword = managerTest.getPassword();
+
 
     }
 
@@ -69,7 +68,7 @@ public class ManagerTest {
     @Test
     void TestCorrectUserGeneration(){
         String userGen = managerTest.generateUserPassword();
-        String userPassword = managerTest.generateUserPassword();
+
 
         for(int i = 0; i < userGen.length(); i++){
             char testchar = userGen.charAt(i);
@@ -84,7 +83,7 @@ public class ManagerTest {
 
     @Test
     void TestCorrectPasswordGeneration(){
-        String userGen = managerTest.generateUserPassword();
+
         String userPassword = managerTest.generateUserPassword();
 
         for(int i = 0; i < userPassword.length(); i++){
@@ -105,8 +104,7 @@ public class ManagerTest {
         boolean lotExists = false;
         managerTest.addParkingLot(lotID);
         List<ParkingLot> LotTest = managerTest.getParkingLot();
-        for (int i = 0; i < LotTest.size(); i++) {
-            ParkingLot lot = LotTest.get(i);
+        for (ParkingLot lot : LotTest) {
             if (lot.getLotId().equals(lotID)) {
                 lotExists = true;
                 break;
@@ -126,8 +124,7 @@ public class ManagerTest {
         managerTest.addParkingLot(lotID);
         managerTest.removeParkingLot(lotID);
         List<ParkingLot> LotTest = managerTest.getParkingLot();
-        for (int i = 0; i < LotTest.size(); i++) {
-            ParkingLot lot = LotTest.get(i);
+        for (ParkingLot lot : LotTest) {
             if (lot.getLotId().equals(lotID)) {
                 doesExist = true;
                 break;
@@ -200,7 +197,7 @@ public class ManagerTest {
 
 
         ParkingLot lot = proxyTest.getParkingLots().getFirst();
-        ParkingSpace space = lot.getSpaces().get(0);
+        ParkingSpace space = lot.getSpaces().getFirst();
         assertFalse(space.isDisabled());
     }
 
@@ -217,7 +214,7 @@ public class ManagerTest {
 
         // Assert the parking space is disabled
         ParkingLot lot = proxyTest.getParkingLots().getFirst();
-        ParkingSpace space = lot.getSpaces().get(0);
+        ParkingSpace space = lot.getSpaces().getFirst();
         assertFalse(space.isDisabled());
     }
 }
