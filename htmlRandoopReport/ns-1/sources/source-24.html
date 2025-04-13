@@ -1,0 +1,614 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PaymentAdapterRegressionTest0</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Test.Randoop</a>
+</div>
+
+<h1>Coverage Summary for Class: PaymentAdapterRegressionTest0 (Test.Randoop)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PaymentAdapterRegressionTest0</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (35/35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (33/66)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.8%
+  </span>
+  <span class="absValue">
+    (135/199)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Test.Randoop;
+&nbsp;
+&nbsp;import org.junit.FixMethodOrder;
+&nbsp;import org.junit.Test;
+&nbsp;import org.junit.runners.MethodSorters;
+&nbsp;
+&nbsp;@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+<b class="fc">&nbsp;public class PaymentAdapterRegressionTest0 {</b>
+&nbsp;
+<b class="fc">&nbsp;    public static boolean debug = false;</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test01() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test01&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+<b class="fc">&nbsp;        java.lang.Class&lt;?&gt; wildcardClass2 = paymentAdapter1.getClass();</b>
+&nbsp;        // Regression assertion (captures the current behavior of the code)
+<b class="fc">&nbsp;        org.junit.Assert.assertNotNull(wildcardClass2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test02() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test02&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean2 = paymentAdapter1.validatePayment();</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.isPaid()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test03() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test03&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (byte) 0);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test04() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test04&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (-1L));</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test05() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test05&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 10);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test06() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test06&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            java.lang.String str2 = paymentAdapter1.getPaymentStatus();</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.isPaid()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test07() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test07&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 0L);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test08() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test08&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (byte) -1);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test09() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test09&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 1);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test10() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test10&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (byte) 10);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test11() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test11&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (byte) 100);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test12() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test12&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 1L);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test13() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test13&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 0);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test14() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test14&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 10L);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test15() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test15&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) &#39;#&#39;);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test16() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test16&quot;);</b>
+<b class="fc">&nbsp;        java.lang.Object obj0 = new java.lang.Object();</b>
+<b class="fc">&nbsp;        java.lang.Class&lt;?&gt; wildcardClass1 = obj0.getClass();</b>
+&nbsp;        // Regression assertion (captures the current behavior of the code)
+<b class="fc">&nbsp;        org.junit.Assert.assertNotNull(wildcardClass1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test17() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test17&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment(1.0f);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test18() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test18&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment(0.0f);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test19() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test19&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) &#39;a&#39;);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test20() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test20&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (byte) 1);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test21() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test21&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (short) 10);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test22() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test22&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment(100.0f);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test23() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test23&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 100L);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test24() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test24&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (-1));</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test25() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test25&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (short) 0);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test26() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test26&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) 100);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test27() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test27&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) &#39; &#39;);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test28() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test28&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (short) 100);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test29() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test29&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((-1.0f));</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test30() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test30&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (short) 1);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test31() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test31&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) (short) -1);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test32() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test32&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment(10.0f);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test33() throws Throwable {
+<b class="pc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;RegressionTest0.test33&quot;);</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentMethod paymentMethod0 = null;</b>
+<b class="fc">&nbsp;        DesignPatterns.PaymentAdapter paymentAdapter1 = new DesignPatterns.PaymentAdapter(paymentMethod0);</b>
+&nbsp;        // The following exception was thrown during execution in test generation
+&nbsp;        try {
+<b class="fc">&nbsp;            boolean boolean3 = paymentAdapter1.processPayment((float) &#39;4&#39;);</b>
+<b class="nc">&nbsp;            org.junit.Assert.fail(&quot;Expected exception of type java.lang.NullPointerException; message: Cannot invoke \&quot;DesignPatterns.PaymentMethod.processPayment()\&quot; because \&quot;this.paymentMethod\&quot; is null&quot;);</b>
+&nbsp;        } catch (java.lang.NullPointerException e) {
+&nbsp;        // Expected exception.
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-11 17:18</div>
+</div>
+</body>
+</html>

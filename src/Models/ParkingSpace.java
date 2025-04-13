@@ -11,7 +11,7 @@ public class ParkingSpace {
     private boolean isOccupied;
     private String licensePlate;
     private boolean isDisabled;
-    private Sensor sensor;
+    public Sensor sensor;
     private BookingState state;
 
     public ParkingSpace(String id, String location) {
@@ -68,5 +68,9 @@ public class ParkingSpace {
     public void setState(BookingState newState) {
         this.state = newState;
         System.out.println("Parking space " + id + " is now in state: " + newState.getClass().getSimpleName());
+    }
+
+    public BookingState getState() {
+        return this.state;
     }
 }

@@ -1,9 +1,14 @@
 package Test;
 
+import Database.Database;
 import Models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileWriter;
 import java.time.LocalTime;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StaffTest {
@@ -69,8 +74,33 @@ public class StaffTest {
     @Test
     public void testMakeBooking() {
         ParkingSpace space = new ParkingSpace("S1", "Test");
-        Booking b = staff.makeBooking("SB1", "bob", "S1", space, LocalTime.of(8,0), LocalTime.of(9,30));
+        Booking b = staff.makeBooking("SB1", "bob", "S1", space, LocalTime.of(8, 0), LocalTime.of(9, 30));
         assertNotNull(b);
         assertEquals("SB1", b.getBookingId());
+    }
+
+    @Test
+    public void testRegisterAccountAndVerifyCSV() throws Exception {
+        // Step 1: Clear users.csv
+        new FileWriter("users.csv").close();
+
+        // Step 2: Create and register staff
+        Staff staff = new Staff("staff1", "staff1@example.com", "Safe123!", "STA999");
+        boolean result = staff.registerAccount("staff1", "Safe123!");
+
+        // Step 3: Verify success
+        assertTrue(result);
+
+        // Step 4: Check file-backed DB for staff user
+        Database db = Database.getInstance();
+        ArrayList<User> users = db.getUsers();
+
+        assertEquals(1, users.size());
+        User addedUser = users.get(0);
+        assertEquals("staff1", addedUser.getUsername());
+        assertEquals("staff1@example.com", addedUser.getEmail());
+        assertEquals("STA999", addedUser.getLicensePlate());
+        assertEquals("staff", db.getUserType("staff1"));
+        assertFalse(addedUser.getisValidated());
     }
 }
