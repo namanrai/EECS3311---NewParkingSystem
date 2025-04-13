@@ -48,7 +48,7 @@ public class Manager {
      * @return generatedPassword.toString();
      *
      */
-    private String generateUserPassword(){
+    public String generateUserPassword(){
         Random randomgen = new Random();
         StringBuilder generatedPassword = new StringBuilder();
 
@@ -65,7 +65,7 @@ public class Manager {
      * @return generatedUser.toString();
      */
 
-    private String generateUsername(){
+    public String generateUsername(){
         Random randomgen = new Random();
         StringBuilder generatedUser = new StringBuilder();
 
